@@ -21,6 +21,7 @@ the debug mode is on, to edit on it, revise on config.py. It might take few seco
 ### Model prediction
 ![](images/modelpredict.png)
 ### Topic modelling
+hover on the topic to see the key words of each topic
 ![](images/topicmodelling.png)
 ## 5. Folders 
 * **Data**: data need to be imported
