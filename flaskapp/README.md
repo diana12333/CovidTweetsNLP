@@ -30,7 +30,7 @@ hover on the topic to see the key words of each topic
 * **Static**
     * css: the style template used
     * fonts: fonts used
-    * ico: icos in used
+    * ico: icons in used
     * img: images used in frontend
     * js: javascript library
 * **Templates**: html templates
