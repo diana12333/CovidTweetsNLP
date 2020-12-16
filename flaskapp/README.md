@@ -23,6 +23,8 @@ the debug mode is on, to edit on it, revise on config.py. It might take few seco
 ### Topic modelling
 hover on the topic to see the key words of each topic
 ![](images/topicmodelling.png)
+![](images/topic1.png)
+![](images/topic4.png)
 ## 5. Folders 
 * **Data**: data need to be imported
 * **Module**: python module helper functions for data analysis and visualization
