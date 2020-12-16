@@ -1,0 +1,108 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1>Contents Overview</h1>
+</div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+</br>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id = allcards>
+    <div class="card">
+        <img src="/static/img/timeseries2.png" class="card-img-top" alt="..." height = "300", width = "600">
+        <div class="card-body">
+        <a href= "/eda#timeseries"  style="color:#000000">
+        <h5 class="card-title">Sentiment change by time </h5></a>
+        <p class="card-text">Did people's sentiment towards coronavirus change over time? Whether there is any group anxiety? Are there any abnormal phonomenon?</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    </br>
+    <div class="card">
+        <div class="card-body">
+        <img src="/static/img/wordcloud2.png" class="card-img-bottom" alt="..." height = "300", width = "600">
+        <a href= "/eda#word_cloud" style="color:#000000"><h5 class="card-title">Wordcloud</h5></a>
+        <p class="card-text">Generate the wordcloud of the tweets by day and list the most frequent mentioned hashtags</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    </br>
+    <div class="card">
+        <div class="card-body">
+        <img src="/static/img/Faces.png" class="card-img-bottom" alt="..." height = "300", width = "600">
+        <a href= "/model" style="color:#000000">
+        <h5 class="card-title">Sentiment Prediction Tool</h5></a>
+        <p class="card-text">you will be able to input some sentences/tweets,  click  on  sentiment  classification  to  analyze  the  sentiment  of  it. Find out the sentiment of a tweet easily, try it! .</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    </br>
+    <div class="card">
+    <div class="card-body">
+    <img src="/static/img/topicmodel.png" class="card-img-bottom" alt="..." height = "300", width = "600">
+        <a href= "/topic_modelling" style="color:#000000">
+        <h5 class="card-title">Topic Modelling</h5></a>
+        <p class="card-text">—Latent Dirichlet Allocation(LDA).This is a Statistical model for discovering the abstract ”topics” that occur in a collection of documents. This methods make use of the idea of unsupervised machine learning and the Bayesian statistics, built up a modelto explain the components of topics in a corpus(i.e.  20% from topic A+ 50% from topic B +30% from the topic C) .</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    </div>
+    </br>
+    <div class="card">
+    <div class="card-body">
+    <img src="/static/img/trainloss.png" class="card-img-bottom" alt="..." height = "300", width = "600">
+        <a href= "/modelpeformance" style="color:#000000">
+        <h5 class="card-title">Bert model performance</h5></a>
+        <p class="card-text">The model reaches an accuracy of 91% on the validation set. Here are the confusion matrix and the loss during training, .</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    </div>
+</div>>
+
+</br>
+</br>
+<style>
+    #allcards {
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: rgb(73, 95, 221);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+      background-color: #555;
+    }
+</style> 
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,218 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src = "/static/js/jquery-1.11.1.min.js"></script>
+<p class="lead">The sentiment classification model performance</p>
+<h5>The parameter setting</h5>
+<div class="container-sm" style="border: 1px solid rgb(255, 255, 255);">
+<div class="table-responsive-sm" id ="todays-table">
+<table class="table table-hover" width="80%">
+    <thead>
+      <tr>
+        <th  class="col-sm-3" scope="col">Parameter</th>
+        <th  class="col-sm-3" scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Model</th>
+        <td>Bert For Sequence Classification</td>
+      </tr>
+    </tbody>
+    <tbody>
+        <tr>
+          <th scope="row">Optimizer</th>
+          <td>Adam</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row">Learning Rate</th>
+          <td>2e-5</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row">Epoch</th>
+          <td>4</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row">Batch</th>
+          <td>64</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th scope="row">Train:Validate</th>
+          <td>9:1</td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+</div>
+<style>
+#todays-table {
+    margin-right: 200px;
+    margin-left: 200px;
+}
+#confusionmatrix {
+    margin-right: 200px;
+    margin-left: 200px;
+}
+#perfomlossss {
+    margin-right: 200px;
+    margin-left: 200px;
+}
+</style>
+</br>
+<h5> The Confusion Matrix</h5>
+<div id = "confusionmatrix" name ="confusionmatrix" class="container">
+    <section id = "performance_confusion" name = "performance_confusion"> 
+    <div class="mx-auto" id="confusion" name="confusion" width = "500" height = "500"></div>
+    </section>
+</div>
+<h5> The Loss during training </h5>
+<div id = "perfomlossss" name ="perfomlossss" class="container">
+    <section id = "perfomloss" name = "perfomloss"> 
+    <div class="mx-auto" id="loss" name="loss" width = "500" height = "500"></div>
+    </section>
+</div>
+<script>
+var trace1 = {
+  type: 'heatmap', 
+  x: ['Neutral', 'Positive', 'Negative'], 
+  y: ['Neutral', 'Positive', 'Negative'],
+  colorscale : "YlGnBu", 
+  z: [[ 5573,   305,   294],
+       [  124, 13954,   305],
+       [  143,   281, 11588]]
+};
+var data = [trace1];
+var layout = {
+  title: 'Confusion Matrix', 
+  xaxis: {title: 'Predicted value'}, 
+  yaxis: {title: 'Real value'},
+  width: 500,
+  height: 500, 
+  annotations: [
+    {
+      x: 'Neutral', 
+      y: 'Neutral', 
+      font: {color: 'white'}, 
+      text: '5573', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Positive', 
+      y: 'Neutral', 
+      font: {color: 'white'}, 
+      text: '124', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Negative', 
+      y: 'Neutral', 
+      font: {color: 'white'}, 
+      text: '143', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    },   
+    {
+      x: 'Neutral', 
+      y: 'Positive', 
+      font: {color: 'white'}, 
+      text: '305', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Positive', 
+      y: 'Positive', 
+      font: {color: 'rgb(96, 73, 221)'}, 
+      text: '13954', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    },  
+    {
+      x: 'Negative', 
+      y: 'Positive', 
+      font: {color: 'white'}, 
+      text: '281', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Neutral', 
+      y: 'Negative', 
+      font: {color: 'white'}, 
+      text: '294', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Positive', 
+      y: 'Negative', 
+      font: {color: 'white'}, 
+      text: '305', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }, 
+    {
+      x: 'Negative', 
+      y: 'Negative', 
+      font: {color: 'white'}, 
+      text: '11588', 
+      xref: 'x1', 
+      yref: 'y1', 
+      showarrow: false
+    }
+  ]
+};
+Plotly.plot('confusion', {
+  data: data,
+  layout: layout
+});
+</script>
+<script>
+    var layout = {
+        width: 400,
+        height :400,
+        title: 'Model Loss', 
+        xaxis: {tickmode: "array", // If "array", the placement of the ticks is set via `tickvals` and the tick text is `ticktext`.
+    tickvals: [1,2,3,4],
+    ticktext: ['1', '2', '3', '4'],title: 'Epoch'}, 
+        yaxis: {title: 'Loss'},
+            "margin": {
+                "l": 50,
+                "r": 50,
+                "b": 100,
+                "t": 100,
+                "pad": 4
+            },
+            "colorway" : ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844'],
+            "template":"seaborn"
+            }
+    var x = [1, 2, 3, 4]
+    var data = [
+            {"x": x, "y": [0.54, 0.31, 0.23,0.17], "type": "scatter","name":'Train',"color":'#636EFA'},
+            {"x": x, "y": [0.38,0.34, 0.34, 0.35], "type": "scatter","name":'Valid'}
+        ]
+    Plotly.plot('loss', {
+  data: data,
+  layout: layout
+});
+</script>       
+{% endblock %}

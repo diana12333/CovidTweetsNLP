@@ -1,0 +1,111 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>About Page</h1>
+</div>
+
+<p class="lead">The Coronavirus Tweets Text Mining and Sentiment Prediction</p>
+<div class="p-3 sm-3 text-dark">This is a final project for BIS 634, Computational Methods for Informatics, supervised by Prof. Robert Mcdougal</div>
+<h3>COVID - 19 </h3>
+<h5>
+<p>Coronavirus disease 2019 (COVID-19) is a contagious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).
+  It has spread worldwide, leading to an ongoing pandemic since Dec 2019.</p>
+</h5>
+<h3>Social Media</h3>
+<h5>
+<p>Since there wasn’t any proved effective medicine or vaccine back then, CDC initiated a quarantine guideline for COVID-19 prevention. 
+  Most of the schooling and work were moved online until now.
+  Social Media became an essential resources for people to communicate with each other. It certainly made our lives convenient.
+   However, it's a double-edged sword. Misinformation, fake new and extreme emotion can mislead the public.   
+   In a way, remote work and learning increased the anxiety in public because of the social media. 
+</p>
+</h5>
+
+<h3>Study Objective </h3>
+<h5>
+<p>One of largest online public communities Twitter is an important resource for people to learn about this new virus and communicate with each other.
+  This study focused on the Coronavirus Tweets Text Mining and Sentiment analysis. It's intended to be a public visualization tool for public to learn about the topics and
+   people's emotion during COVID-19. 
+</p>
+</h5>
+<h3>Data Resources</h3>
+<h5>
+  <p> I am using it’s a coronavirus tweets text data fromkaggle public data Repositories.  Seethe data source here
+     <a href="https://www.kaggle.com/datatattle/covid-19-nlp-text-classification">Coronavirus tweets NLP - Text Classification</a>. 
+     It was collected fromTwitter streamwith a purpose of scientific use and all the confidential information was removed from the dataset. 
+  </p>
+  </h5>
+<h3>Original Data description</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Variable</th>
+      <th scope="col">Description </th>
+      <th scope="col">Type </th>  
+      <th scope="col" >Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">UserName</th>
+      <td>The user ids, correspond to information of different users.</td>
+      <td>Integer</td>
+      <td style="width:  30%">3799</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">ScreenName</th>
+      <td> The user ids, correspond to different users’ twitter names.</td>
+      <td>Integer</td>
+      <td style="width:  30%">48751</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">Location</th>
+      <td> Where did the twitter sent from, input by users. Can be country level/state level/random sentence</td>
+      <td>String
+      </td>
+      <td style="width:  30%">London</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">TweetAt</th>
+      <td> The date a user posted the twitter in yyyy-mm-dd format</td>
+      <td>Date
+      </td>
+      <td style="width:  30%">2020-03-16</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">OriginalTweet</th>
+      <td> The twitter text - free text</td>
+      <td>String
+      </td>
+      <td style="width:  30%">Was at the supermarket today. Didn't buy toilet paper. #Rebel#toiletpapercrisis #covid_19 https://t.co/eVXkQLIdAZ</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">Sentiment</th>
+      <td> The sentiment labelled manually, catgorical variable with 5 classes "Neutral" , "Positive", "Extremely Negative", "Negative", "Extremely Positive"</td>
+      <td>String
+      </td>
+      <td style="width:  30%">Neutral</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+</br>
+</br>
+<p>Hope every one stay healthy!</p>
+<br>
+</br>
+</br>
+
+{% endblock %}

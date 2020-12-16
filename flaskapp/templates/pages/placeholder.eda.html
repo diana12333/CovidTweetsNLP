@@ -1,0 +1,245 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src = "/static/js/jquery-1.11.1.min.js"></script>
+
+
+<p class="lead">The sentiment distribution</p>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<section id = "timeseries" name = "timeseries"> 
+<div id="bargraph" name="bargraph"></div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <label> Choose the plot type....</label>
+            <select class="form-control" id ='first_cat'>
+                <option value="Bar">Bar</option>
+                <option value="Scatter">Scatter</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <div class="chart" id="bargraph">
+                <script>
+                    (fetch("/bar")
+                    .then(response => response.json())
+                    .then(function (data) {
+                        Plotly.newPlot("bargraph", data[0]['data'],data[0]['layout']);
+                        var myPlot = document.getElementById('bargraph');
+                        myPlot.on("plotly_click",function(data){
+                                    console.log(data)
+                                    let selectdate = data['points'][0]['x'];
+                                    $("#date_click").html(`<p>At ${selectdate}</p>`)
+                                    fetch(`/api/wordcloud?date=${selectdate}`).
+                                    then(response => response.json()).
+                                    then(function(data){
+                                        var layout = {
+                                        "grid": {rows: 1, columns: 2, pattern: 'independent'},
+                                        "autosize": true,
+                                        "height": 700,
+                                        "width": 1200,
+                                        "xaxis2": {
+                                            "showgrid": false,
+                                            "showticklabels": false,
+                                            "zeroline": false,
+                                            "automargin": true,
+                                            "range": [-100, 250],
+                                            "domain": [0.3, .9]
+                                        },
+                                        "yaxis2": {
+                                            "showgrid": false,
+                                            "showticklabels": false,
+                                            "zeroline": false,
+                                            "automargin": true,
+                                            "range": [-100, 450],
+                                        },
+                                        "xaxis": {domain: [0,0.2]},
+                                        "yaxis":{ automargin: true,
+                                            tickangle: -45,
+                                            tickfont: {size: 10},
+                                        autorange:"reversed"},
+                                        "hovermode": "closest",
+                                        "showlegend":false
+                                    };
+                                        Plotly.newPlot("myWorldCloud", {data:data,layout:layout});
+                                })})
+                            }))
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">       
+        <form>
+            <div class="col-xs-6">
+            <lable><b>Choose display date range</br></b></label>
+            <select class="form-select" id = "date-select-start" name = "date-select-start" aria-label="2020-03-16">
+            
+                <option selected>Select a start date</option>
+                {% for each in listStatus %}
+        
+                <option value="{{each}}" {% if each == "list_status" %} selected {% endif %}>{{each}}</option>
+                
+                {% endfor %}
+            </select>
+            <select class="form-select" id = "date-select-end" name = "date-select-end" aria-label="2020-04-14">
+                <option selected>Select an end date</option>
+                {% for each in listStatus %}
+                <option value="{{each}}" {% if each == "list_status" %} selected {% endif %}>{{each}}</option>
+                {% endfor %}
+            </select>
+        </div><br/>
+        </form>
+    </div>
+</div>
+<div>
+    <br/>
+    <br/><p class="lead">Word Cloud and the top 20 hashtags </p>
+</div>
+<div id = "date_click"></div>
+<section id = "word_cloud" name = "word_cloud"> 
+    <div id = "myWorldCloud"></div>
+</section>
+<br/>
+
+<br/>
+<style>
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: rgb(73, 95, 221);
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+      background-color: #555;
+    }
+</style> 
+
+<script src = "/static/js/jquery-1.11.1.min.js"></script>
+<script>
+$('#first_cat').on('change',function(){
+        console.log(document.getElementById('first_cat').value)
+        let selected= document.getElementById('first_cat').value;
+        fetch(`/bar?feature=${selected}`).
+        then(response => response.json()).
+        then(function(data){
+            Plotly.newPlot("bargraph", data[0]['data'],data[0]['layout']);
+            var myPlot = document.getElementById('bargraph');
+            myPlot.on("plotly_click",function(data){
+                        console.log(data)
+                        let selectdate = data['points'][0]['x'];
+                        $("#date_click").html(`<p>At ${selectdate}</p>`)
+                        fetch(`/api/wordcloud?date=${selectdate}`).
+                        then(response => response.json()).
+                        then(function(data){
+                            var layout = {
+                                        "grid": {rows: 1, columns: 2, pattern: 'independent'},
+                                        "autosize": true,
+                                        "height": 700,
+                                        "width": 1200,
+                                        "xaxis2": {
+                                            "showgrid": false,
+                                            "showticklabels": false,
+                                            "zeroline": false,
+                                            "automargin": true,
+                                            "range": [-100, 250],
+                                            "domain": [0.3, .9]
+                                        },
+                                        "yaxis2": {
+                                            "showgrid": false,
+                                            "showticklabels": false,
+                                            "zeroline": false,
+                                            "automargin": true,
+                                            "range": [-100, 450],
+                                        },
+                                        "xaxis": {domain: [0,0.2]},
+                                        "yaxis":{ tickangle: -45,
+                                            tickfont: {size: 10},
+                                        autorange:"reversed"},
+                                        "hovermode": "closest",
+                                        "showlegend":false
+                                    };
+                            Plotly.newPlot("myWorldCloud", {data:data,layout:layout});
+                    })})
+    })})
+</script>
+<script>
+    $('#date-select-start').on('change',function(){
+        var data = {
+                'xaxis.range[0]': document.getElementById('date-select-start').value
+            };
+        Plotly.relayout("bargraph", data);
+        })
+    $('#date-select-end').on('change',function(){
+        var data = {
+                'xaxis.range[1]': document.getElementById('date-select-end').value
+            };
+        Plotly.relayout("bargraph", data);
+        console.log(data)
+        })
+    </script>
+<script>
+    //Get the button:
+    mybutton = document.getElementById("myBtn");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
+<script>
+    (fetch(`/api/wordcloud`).
+    then(response => response.json()).
+    then(function(data){
+        var layout = {
+            "grid": {rows: 1, columns: 2, pattern: 'independent'},
+            "autosize": true,
+            "height": 700,
+            "width": 1200,
+            "xaxis2": {
+                "showgrid": false,
+                "showticklabels": false,
+                "zeroline": false,
+                "automargin": true,
+                "range": [-100, 250],
+                "domain": [0.3, 0.9]
+            },
+            "yaxis2": {
+                "showgrid": false,
+                "showticklabels": false,
+                "zeroline": false,
+                "automargin": true,
+                "range": [-100, 450],
+            },
+            "xaxis": {domain: [0,0.2],title:"Frequency"},
+            "yaxis":{ automargin: true,tickangle: -45,
+                tickfont: {size: 10},
+            autorange:"reversed"},
+            "hovermode": "closest",
+            "showlegend":false
+        };
+        Plotly.newPlot("myWorldCloud", data,layout);
+    }))
+</script>
+{% endblock %}

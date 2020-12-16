@@ -1,0 +1,20 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src = "/static/js/jquery-1.11.1.min.js"></script>
+<div class="page-header">
+    <h2>Bert Sequence Prediction Model</h2>
+</div>
+<form action="/sentiment" method="POST">
+  <div id = "new class" class="form-floating">
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name ="sent"></textarea>
+    <label for="floatingTextarea2">Comments</label>
+  </div>
+  <br>
+  <input type="submit" value="Analyze">
+</form>
+
+
+{% endblock %}
