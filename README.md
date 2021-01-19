@@ -19,4 +19,19 @@ representing and communicating the information with the public.
 ### Flask App
 check out the the Flask app in the **Flask app** folder.
 A quick peak of the app
+<figure>
+  <img src="/gif/demo3.gif" width="800" height="800" />
+  <figcaption>Fig.0 A demo</figcaption>
+</figure>
+<figure>
+  <img src="/gif/demo2.gif" width="800" height="800" />
+  <figcaption>Fig.1 Word Cloud and bar charts line charts</figcaption>
+</figure>
+<figure>
+  <img src="/gif/bert-tweets.gif" width="800" height="800">
+  <figcaption>Fig.2 The Bert Fine-tuned models usage for sentiment prediction</figcaption>
+</figure>
+
+
+### Also deployed version here
 see the details at https://bis634.herokuapp.com/
