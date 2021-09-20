@@ -5,9 +5,9 @@ from module.nlp_cleaner import extract_hashtags
 from module.nlp_cleaner import data_clean
 from module.nlp_cleaner import plotly_wordcloud
 from module.visualization import create_plot
-from module.bert_ import load_pretrained
-from module.bert_ import predict_sentiment
-from module.bert_ import trans_to_sentiment
+from module.onlp_bert import load_pretrained
+from module.onlp_bert import predict_sentiment
+from module.onlp_bert import trans_to_sentiment
 from flask import Flask, render_template, request
 from flask import render_template_string, jsonify
 from plotly.utils import PlotlyJSONEncoder
