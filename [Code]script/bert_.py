@@ -80,16 +80,16 @@ def predict_sentiment(model,tokenizer,sent):
         return pred_labels_i[0],prob[0]
 
 def trans_to_sentiment(prediction,prob):
-    l = {0:"netural", 1:"positive",2:"negative"}
+    l = {2:"netural", 1:"positive",0:"negative"}
     label = l[prediction]
     prob = list(zip(l.values(),list(prob)))
-    return label,prob[0],prob[1],prob[2]
+    return label,prob[2],prob[1],prob[0]
 
 if __name__ == "__main__":
     model,tokenizer = load_pretrained()
     sent = "covid is good in some way"
     prediction,prob = predict_sentiment(model,tokenizer,sent)
-    l = {0:"netural", 1:"positive",2:"negative"}
+    l = {2:"netural", 1:"positive",0:"negative"}
     print('predicted as',str(l[prediction]))
     
     print(list(zip(l.values(),list(prob))))

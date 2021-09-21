@@ -10,10 +10,10 @@ from flask import render_template_string, jsonify
 
 def data_clean(path):
     df = pd.read_csv(path,encoding = "ISO-8859-1")
-    df['OriginalTweet']=df['OriginalTweet'].astype(str)
-    df['Sentiment']=df['Sentiment'].astype(str)
-    df['TweetAt']=df['TweetAt'].astype(str)
-    df['TweetAt'] = pd.to_datetime(df['TweetAt'] , format='%d-%m-%Y')
+    df['OriginalTweet']=df['texts'].astype(str)
+    df['Sentiment']=df['label'].astype(str)
+    #df['TweetAt']=df['TweetAt'].astype(str)
+    #df['TweetAt'] = pd.to_datetime(df['TweetAt'] , format='%d-%m-%Y')
     df['hash']=df['OriginalTweet'].apply(lambda x:extract_hashtags(x))
     df['OriginalTweet']=df['OriginalTweet'].apply(lambda x:clean_text(x))
     return df  
