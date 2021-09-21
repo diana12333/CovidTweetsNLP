@@ -20,11 +20,11 @@ def create_plot(ts,feature="Bar"):
                     }
         x = [str(i)[:10] for i in ts.index.to_list()]
         data = [
-            {"x": x, "y": ts['Extremely Negative'].to_list(), "type": "bar","name":'Extremely Negative',"color":'#636EFA'},
+            
             {"x": x, "y": ts.Negative.to_list(), "type": "bar","name":'Negative'},
             {"x": x, "y": ts['Neutral'].to_list(), "type": "bar","name":"Neutral"},
-            {"x": x, "y": ts.Positive.to_list(), "type": "bar","name":"Positive"},
-            {"x": x, "y": ts['Extremely Positive'].to_list(), "type": "bar","name":'Extremely Positive'}
+            {"x": x, "y": ts.Positive.to_list(), "type": "bar","name":"Positive"}
+         
         ]
         graphJSON = (jsonify([{"data":data, "layout":layout}]))
     else:
@@ -41,11 +41,11 @@ def create_plot(ts,feature="Bar"):
             "template":"seaborn"
             }
         data = [
-            {"x": x, "y": ts['Extremely Negative'].to_list(), "type": "scatter","name":'Extremely Negative',"color":'#636EFA'},
+            
             {"x": x, "y": ts.Negative.to_list(), "type": "scatter","name":'Negative'},
             {"x": x, "y": ts['Neutral'].to_list(), "type": "scatter","name":"Neutral"},
-            {"x": x, "y": ts.Positive.to_list(), "type": "scatter","name":"Positive"},
-            {"x": x, "y": ts['Extremely Positive'].to_list(), "type": "scatter","name":'Extremely Positive'}
+            {"x": x, "y": ts.Positive.to_list(), "type": "scatter","name":"Positive"}
+            
         ]
         graphJSON = (jsonify([{"data":data, "layout":layout}]))
 
